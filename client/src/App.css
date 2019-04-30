@@ -1,0 +1,23 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
+}
+
+.app__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Toast Overide */
+.toast-notification {
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 0px 0px 5px 5px;
+  background: #fff;
+  font: inherit;
+  padding: 5px;
+  color: #999;
+  cursor: pointer;
+}

@@ -1,0 +1,9 @@
+.confirm a {
+  color: #6279ab;
+  font: inherit;
+  text-decoration: none;
+}
+
+.confirm a:hover {
+  color: #334f8d;
+}
