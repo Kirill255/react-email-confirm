@@ -4,6 +4,8 @@ import { notify } from "react-notify-toast";
 
 import Spinner from "./Spinner";
 
+import { API_URL } from "../config";
+
 import "./Confirm.css";
 
 export default class Confirm extends Component {
@@ -23,10 +25,13 @@ export default class Confirm extends Component {
     const { id } = this.props.match.params;
     console.log(id);
 
-    setTimeout(() => {
-      this.setState({ confirming: false });
-      notify.show("Other message");
-    }, 3000);
+    fetch(`${API_URL}/email/confirm/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ confirming: false });
+        notify.show(data.msg);
+      })
+      .catch((err) => console.log(err));
   }
 
   render() {

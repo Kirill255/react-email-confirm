@@ -7,6 +7,8 @@ import Confirm from "./components/Confirm";
 import Footer from "./components/Footer";
 import Spinner from "./components/Spinner";
 
+import { API_URL } from "./config";
+
 import "./App.css";
 
 export default class App extends Component {
@@ -20,9 +22,12 @@ export default class App extends Component {
   // service like uptimerobot.com to ping the server regularly can mitigate
   // sleepiness.
   componentDidMount() {
-    setTimeout(() => {
-      this.setState({ loading: false });
-    }, 3000);
+    fetch(`${API_URL}/wake-up`)
+      .then((res) => res.json())
+      .then(() => {
+        this.setState({ loading: false });
+      })
+      .catch((err) => console.log(err));
   }
 
   getContent = () => {

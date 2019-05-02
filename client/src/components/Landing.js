@@ -3,6 +3,8 @@ import { notify } from "react-notify-toast";
 
 import Spinner from "./Spinner";
 
+import { API_URL } from "../config";
+
 import "./Landing.css";
 
 export default class Landing extends Component {
@@ -14,11 +16,21 @@ export default class Landing extends Component {
     event.preventDefault();
     this.setState({ sendingEmail: true });
 
-    setTimeout(() => {
-      this.setState({ sendingEmail: false });
-      notify.show("Some message");
-      this.form.reset();
-    }, 3000);
+    fetch(`${API_URL}/email`, {
+      method: "pOSt",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email: this.email.value })
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ sendingEmail: false });
+        notify.show(data.msg);
+        this.form.reset();
+      })
+      .catch((err) => console.log(err));
   };
 
   render() {
